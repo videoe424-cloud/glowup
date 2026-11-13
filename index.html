@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Glow Up Mornings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,600&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fde7ee;--dot:#f2a9c2;--card:#fff9fb;--ink:#5a2a3c;--muted:#855568;--rose:#e0558a;--rose-d:#c23b73;--soft:#fbd3e1;--line:#f0a5bf;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background-color:var(--bg);background-image:radial-gradient(var(--dot) 1.4px,transparent 1.7px);background-size:20px 20px;color:var(--ink);font-family:'Quicksand','Nunito','Segoe UI',system-ui,sans-serif;line-height:1.5}
+.wrap{max-width:560px;margin:0 auto;padding:24px 16px 56px}
+.kicker{letter-spacing:.18em;text-transform:uppercase;font-size:.72rem;font-weight:700;color:var(--muted);margin:0}
+h1{font-family:'Playfair Display',Georgia,serif;font-size:2.5rem;line-height:1.05;margin:.3rem 0 1rem;color:var(--rose-d)}
+h1 em{font-weight:600}
+h2{font-family:'Playfair Display',Georgia,serif;font-size:1.3rem;margin:0 0 8px;color:var(--rose-d)}
+h3{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:14px 0 2px}
+.card{background:var(--card);border:2px dashed var(--line);border-radius:20px;padding:16px;margin:0 0 14px}
+.top{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:10px}
+.big{font-family:'Playfair Display',Georgia,serif;font-size:2.3rem;font-weight:700;color:var(--rose-d);line-height:1}
+.big small{font-size:1rem;color:var(--muted);font-family:inherit;font-weight:600}
+.stage{font-weight:700;text-align:right;font-size:.95rem}
+.bar{height:14px;border-radius:99px;background:var(--soft);overflow:hidden;border:1px solid var(--line)}
+.fill{height:100%;width:0;background:linear-gradient(90deg,#f6a0bf,var(--rose-d));transition:width .5s ease}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 12px;margin:0 -2px}
+.tab{flex:0 0 auto;min-width:58px;border:2px dashed var(--line);background:var(--card);color:var(--ink);border-radius:14px;padding:7px 10px;font:inherit;font-weight:700;font-size:.88rem;cursor:pointer;text-align:center}
+.tab small{display:block;font-weight:600;color:var(--muted);font-size:.7rem}
+.tab[aria-selected=true]{background:var(--rose-d);border:2px solid var(--rose-d);color:#fff}
+.tab[aria-selected=true] small{color:#ffe3ee}
+.phase{background:var(--soft);border-radius:14px;padding:10px 14px;font-size:.9rem;margin-bottom:12px}
+.phase b{color:var(--rose-d)}
+.day{background:var(--card);border:2px dashed var(--line);border-radius:20px;margin:0 0 12px;overflow:hidden}
+.day.done{background:#fff0f5;border-style:solid}
+.dh{display:flex;align-items:center;gap:12px;padding:12px 14px}
+.tick{width:42px;height:42px;border-radius:50%;border:2px solid var(--rose);background:#fff;color:#fff;font:inherit;font-size:1.2rem;font-weight:700;cursor:pointer;flex:0 0 auto;display:grid;place-items:center;padding:0}
+.tick[aria-pressed=true]{background:var(--rose-d);border-color:var(--rose-d)}
+.dt{flex:1;text-align:left;background:none;border:0;font:inherit;color:inherit;cursor:pointer;padding:0;display:flex;align-items:center;gap:8px;min-width:0}
+.dt>span:first-child{flex:1}
+.dn{display:block;font-weight:700}
+.ds{display:block;font-size:.82rem;color:var(--muted)}
+.chev{color:var(--rose-d);font-weight:700;font-size:1.3rem}
+.dbody{padding:0 14px 14px;border-top:2px dotted var(--line)}
+.row{display:flex;justify-content:space-between;gap:14px;padding:7px 0;border-bottom:1px dotted var(--line);font-size:.92rem}
+.row b{color:var(--rose-d);text-align:right;flex:0 0 auto;font-weight:700}
+.how{display:block;font-size:.8rem;font-weight:500;color:var(--muted);margin-top:1px}
+.note{font-size:.85rem;color:var(--muted);margin:10px 0 0}
+.rest{padding:10px 14px;margin:0 0 12px;text-align:center;color:var(--muted);font-size:.88rem;border:2px dotted var(--line);border-radius:16px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+label{font-size:.8rem;font-weight:700;color:var(--muted);display:block;margin-bottom:3px}
+input{width:100%;font:inherit;font-size:16px;padding:9px 10px;border:2px dashed var(--line);border-radius:12px;background:#fff;color:var(--ink)}
+ul,ol{margin:0;padding-left:1.2rem;font-size:.92rem}
+li{margin:4px 0}
+.reset{background:none;border:0;font:inherit;font-size:.82rem;color:var(--muted);text-decoration:underline;cursor:pointer;display:block;margin:18px auto 0}
+.foot{text-align:center;font-family:'Playfair Display',Georgia,serif;font-style:italic;color:var(--rose-d);margin-top:20px}
+button:focus-visible,input:focus-visible{outline:3px solid var(--rose-d);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.fill{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Jovita’s 8-week plan</p>
+  <h1>Glow Up <em>Mornings</em></h1>
+
+  <div class="card" id="meter">
+    <div class="top">
+      <div class="big"><span id="cnt">0</span> <small>of 40 mornings done</small></div>
+      <div class="stage" id="stage"></div>
+    </div>
+    <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="40" id="pb"><div class="fill" id="fill"></div></div>
+  </div>
+
+  <div class="tabs" id="tabs" role="tablist"></div>
+  <div class="phase" id="phase"></div>
+  <div id="days"></div>
+
+  <div class="card">
+    <h2>My numbers</h2>
+    <div style="font-size:.88rem;color:var(--muted)">Fill in your starting point, then update “Now” whenever you like. Seeing these go up is the real glow up.</div>
+    <div class="grid">
+      <div><label for="n1">Skipping without stopping, start (sec)</label><input id="n1" type="number" inputmode="numeric" min="0"></div>
+      <div><label for="n2">Skipping without stopping, now (sec)</label><input id="n2" type="number" inputmode="numeric" min="0"></div>
+      <div><label for="n3">Squats in one go, start</label><input id="n3" type="number" inputmode="numeric" min="0"></div>
+      <div><label for="n4">Squats in one go, now</label><input id="n4" type="number" inputmode="numeric" min="0"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Skipping tips</h2>
+    <ul>
+      <li>Jump low, just enough for the rope to pass. Land softly on the balls of your feet.</li>
+      <li>Check your ceiling height and clear some floor space first.</li>
+      <li>No room for the rope? Skip with an imaginary rope. It works just as well.</li>
+      <li>Short rounds with rests are perfect. You don’t need to go non-stop.</li>
+      <li>A mat or rug is kinder to your knees.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Rules of the plan</h2>
+    <ol>
+      <li>Movement only. Eat normally and enjoy your food.</li>
+      <li>Never skip the warm-up.</li>
+      <li>Drink water before and after.</li>
+      <li>Sore is okay, pain is not. Stop if something hurts.</li>
+      <li>Missed a day? Just come back the next one.</li>
+      <li>Do this to feel strong and proud of yourself.</li>
+    </ol>
+  </div>
+
+  <p class="foot">You’ve got this, Jovita.</p>
+  <button class="reset" id="reset" type="button">Clear all my progress</button>
+</div>
+
+<script>
+const K="glow-up-mornings-v1";
+let S={done:{},nums:{}};
+try{const r=localStorage.getItem(K);if(r){const p=JSON.parse(r);S.done=p.done||{};S.nums=p.nums||{}}}catch(e){}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+
+const DAYS=[
+{k:"mon",n:"Monday",t:"Skip & Sculpt",s:"(Skipping plus moves that shape and tone your legs and glutes)",note:"Do the moves one after another as a circuit, then finish with skipping.",ex:[
+["Skipping","4 rounds of 30 sec","5 rounds of 45 sec","Jump low over the rope and land softly on the balls of your feet."],
+["Squats","12","15","Feet shoulder-width apart. Sit back like you’re sitting on a chair, then stand up."],
+["Reverse lunges","8 each leg","12 each leg","Step one foot back, bend both knees, then step forward. Switch legs."],
+["Glute bridges","15","20","Lie on your back with knees bent. Lift your hips, squeeze, and lower slowly."],
+["Side-lying leg lifts","12 each side","15 each side","Lie on your side and slowly lift the top leg up, then down."],
+["Wall sit","20 sec","40 sec","Back against the wall, slide down until your knees are bent, and hold."]]},
+{k:"tue",n:"Tuesday",t:"Core & Glow",s:"(Core means your tummy and back muscles. These moves make them strong)",ex:[
+["Plank (on knees if needed)","20 sec","40 sec","Hold your body straight on forearms and toes (or knees) with your tummy tight."],
+["Dead bug","8 each side","12 each side","Lie on your back, arms up, knees bent. Lower the opposite arm and leg, then switch."],
+["Bicycle crunches","12 each side","16 each side","Lie on your back and pedal your legs, touching each elbow to the opposite knee."],
+["Slow mountain climbers","20 sec","30 sec","In a push-up position, bring one knee toward your chest, then switch. Go slowly."],
+["Superman hold","10","15","Lie on your tummy, lift your arms and legs a little, hold, then lower."],
+["Skipping","2 min total","4 min total","Jump low over the rope and land softly. Rest whenever you need."]]},
+{k:"thu",n:"Thursday",t:"Upper Body & Posture",s:"(Arms, back and shoulders. This helps you stand tall)",ex:[
+["Knee push-ups","8","12","Hands under shoulders, knees on the floor. Lower your chest, then push back up."],
+["Chair tricep dips","8","12","Hands on a sturdy chair behind you. Bend your elbows to lower, then push up."],
+["Shoulder taps","10","16","In a push-up position, tap one shoulder with the opposite hand, then switch."],
+["Wall angels","10","15","Back against the wall, arms bent like a goalpost. Slide them up and down."],
+["Superman pulls","10","15","Lie on your tummy, arms forward. Pull your elbows back as you lift your chest."],
+["Skipping","4 rounds of 30 sec","5 rounds of 45 sec","Jump low over the rope and land softly. Rest between rounds."]]},
+{k:"fri",n:"Friday",t:"Dance & Skip Burst",s:"(Fun cardio: dancing and skipping in short, fast rounds)",note:"Quiet option: swap jumps for marching and step-jacks (step out one leg at a time).",ex:[
+["Free dance in your room","2 songs","3 songs","Put on songs you love and just move."],
+["Skipping","5 rounds of 30 sec","6 rounds of 45 sec","Jump low over the rope and land softly."],
+["Jumping jacks","20","30","Jump your feet apart as your arms go overhead, then back together."],
+["High knees","30 sec","45 sec","Run in place and lift your knees high."],
+["Butt kicks","30 sec","45 sec","Run in place and kick your heels toward your bottom."]]},
+{k:"sat",n:"Saturday",t:"Full Body Flow",s:"(A mix of the week’s moves, one flowing into the next)",ex:[
+["Squat to calf raise","12","16","Do a squat, then as you stand up, rise onto your toes."],
+["Knee push-ups","8","12","Hands under shoulders, knees on the floor. Lower your chest, then push up."],
+["Glute bridges","15","20","Lie on your back with knees bent. Lift your hips, squeeze, and lower slowly."],
+["Plank","20 sec","40 sec","Hold your body straight on forearms and toes (or knees) with your tummy tight."],
+["Reverse lunges","8 each leg","12 each leg","Step one foot back, bend both knees, then step forward. Switch legs."],
+["Skipping finisher","3 min","5 min","Jump low over the rope and land softly. Rest whenever you need."]]}
+];
+const WARM=[["March in place","1 min"],["Shoulder rolls","30 sec"],["Arm circles","30 sec"],["Hip circles","30 sec","Hands on your hips and draw big circles."],["Gentle high knees","1 min","March faster and lift your knees a bit higher."],["Bodyweight squats","10 slow reps","Sit back slowly, then stand up."],["Deep breaths","3 rounds","In through your nose, out through your mouth."]];
+const COOL=[["Standing quad stretch","30 sec each leg","Hold your ankle behind you with your knee pointing down."],["Hamstring stretch","30 sec each leg","Straighten one leg in front and lean forward gently."],["Child’s pose","45 sec","Kneel, sit back on your heels, and stretch your arms forward."],["Cat-cow","8 slow rounds","On hands and knees, arch your back up, then dip it down."],["Chest opener","30 sec","Clasp your hands behind your back and lift gently."],["Slow deep breathing","1 min"]];
+const LAYOUT=["mon","tue",{r:"Wednesday"},"thu","fri","sat",{r:"Sunday"}];
+
+const $=s=>document.querySelector(s);
+const key=(w,k)=>w+"-"+k;
+const wkDone=w=>DAYS.filter(d=>S.done[key(w,d.k)]).length;
+const total=()=>{let c=0;for(let w=1;w<=8;w++)c+=wkDone(w);return c};
+let week=1,openKey=null;
+for(let w=1;w<=8;w++){if(wkDone(w)<5){week=w;break}if(w===8)week=8}
+
+function stageText(p){
+  if(p===0)return "Day one starts here";
+  if(p<25)return "Warming up";
+  if(p<50)return "Finding your rhythm";
+  if(p<75)return "Glowing";
+  if(p<100)return "Almost radiant";
+  return "Glow up complete";
+}
+const rows=a=>a.map(x=>'<div class="row"><span>'+x[0]+(x[2]?'<span class="how">('+x[2]+')</span>':'')+'</span><b>'+x[1]+'</b></div>').join("");
+
+function render(){
+  const t=total(),p=Math.round(t/40*100);
+  $("#cnt").textContent=t;
+  $("#fill").style.width=p+"%";
+  $("#pb").setAttribute("aria-valuenow",t);
+  $("#stage").textContent=stageText(p);
+
+  $("#tabs").innerHTML=Array.from({length:8},(_,i)=>{
+    const w=i+1;
+    return '<button class="tab" role="tab" type="button" data-tab="'+w+'" aria-selected="'+(w===week)+'">Week '+w+'<small>'+wkDone(w)+'/5</small></button>';
+  }).join("");
+
+  const ph=week<=4?0:1;
+  $("#phase").innerHTML=ph===0
+    ?'<b>Weeks 1 to 4: Build the habit.</b> 2 rounds of each circuit (doing the moves one after another, then repeating), 30 sec rest between moves.'
+    :'<b>Weeks 5 to 8: Level up.</b> 3 rounds of each circuit (doing the moves one after another, then repeating), 20 sec rest between moves.';
+
+  $("#days").innerHTML=LAYOUT.map(item=>{
+    if(item.r)return '<div class="rest">'+item.r+': rest day. Stretch if you like.</div>';
+    const d=DAYS.find(x=>x.k===item),k=key(week,d.k),done=!!S.done[k],isOpen=openKey===k;
+    let body="";
+    if(isOpen){
+      body='<div class="dbody"><h3>Warm-up, 5 min</h3>'+rows(WARM)
+        +'<h3>Main workout</h3>'+rows(d.ex.map(e=>[e[0],e[1+ph],e[3]]))
+        +(d.note?'<p class="note">'+d.note+'</p>':'')
+        +'<h3>Cool-down, 5 min</h3>'+rows(COOL)+'</div>';
+    }
+    return '<div class="day'+(done?' done':'')+'"><div class="dh">'
+      +'<button class="tick" type="button" data-tick="'+k+'" aria-pressed="'+done+'" aria-label="Mark '+d.n+' done">'+(done?'✓':'')+'</button>'
+      +'<button class="dt" type="button" data-open="'+k+'" aria-expanded="'+isOpen+'"><span><span class="dn">'+d.n+': '+d.t+'</span><span class="ds">'+d.s+'</span></span><span class="chev">'+(isOpen?'–':'+')+'</span></button>'
+      +'</div>'+body+'</div>';
+  }).join("");
+}
+
+document.addEventListener("click",e=>{
+  const tab=e.target.closest("[data-tab]");
+  if(tab){week=+tab.dataset.tab;openKey=null;render();return}
+  const tk=e.target.closest("[data-tick]");
+  if(tk){const k=tk.dataset.tick;if(S.done[k])delete S.done[k];else S.done[k]=true;save();render();return}
+  const op=e.target.closest("[data-open]");
+  if(op){const k=op.dataset.open;openKey=openKey===k?null:k;render();return}
+});
+
+["n1","n2","n3","n4"].forEach(id=>{
+  const el=$("#"+id);
+  if(S.nums[id]!==undefined)el.value=S.nums[id];
+  el.addEventListener("input",()=>{S.nums[id]=el.value;save()});
+});
+
+let armed=false;
+$("#reset").addEventListener("click",function(){
+  if(!armed){armed=true;this.textContent="Tap again to clear everything";setTimeout(()=>{armed=false;this.textContent="Clear all my progress"},4000);return}
+  S={done:{},nums:{}};save();armed=false;this.textContent="Clear all my progress";
+  ["n1","n2","n3","n4"].forEach(id=>$("#"+id).value="");
+  week=1;openKey=null;render();
+});
+
+render();
+</script>
+</body>
+</html>
